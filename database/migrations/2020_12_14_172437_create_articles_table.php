@@ -19,7 +19,8 @@ class CreateArticlesTable extends Migration
             $table->string('slug');
             $table->text('description');
             $table->longText('body');
-            $table->unsignedBigInteger('like')->default(0);
+            $table->unsignedBigInteger('likes')->default(0);
+            $table->unsignedBigInteger('views')->default(0);
             $table->timestamps();
         });
     }
