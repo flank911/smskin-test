@@ -14,7 +14,9 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        //
+        $articles = Article::latest()->paginate();
+
+        return response()->json($articles);
     }
 
     /**
@@ -46,7 +48,13 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        //
+        cache()->increment('article_' . $article->id . '_likes');
+        cache()->increment('article_' . $article->id . '_views');
+
+        $article->likes = cache()->get('article_' . $article->id . '_likes', $article->likes);
+        $article->views = cache()->get('article_' . $article->id . '_views', $article->views);
+
+        return response()->json($article);
     }
 
     /**
