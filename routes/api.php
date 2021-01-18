@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('v1/articles', 'ArticleController@index');
+Route::get('v1/articles/{article}', 'ArticleController@show');
+Route::get('v1/articles/{article}/like', 'ArticleController@setLike');
+Route::get('v1/articles/{article}/view', 'ArticleController@setView');
